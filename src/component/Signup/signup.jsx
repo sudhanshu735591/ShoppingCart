@@ -15,7 +15,6 @@ function SignUp(){
 
     const navigate = useNavigate();
 
-
    function handleClick(){
     localStorage.setItem("Name" , JSON.stringify(name));
     localStorage.setItem("Email" , JSON.stringify(email));

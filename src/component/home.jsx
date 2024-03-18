@@ -90,7 +90,8 @@ function Home(){
             </div>
 
             <div className="inputBox">
-                <input value={inputValue} onChange={(e)=>setInputValue(e.target.value)} type="text" />
+
+                <input value={inputValue} onChange={(e)=>setInputValue(e.target.value)} type="text" placeholder="Search by product name"/>
                 <button onClick={searchData} type="submit">Submit</button>
             </div>
 
