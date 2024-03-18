@@ -1,0 +1,37 @@
+.homepage{
+    border: 2px solid;
+    padding: 20px;
+    width: 20%;
+    margin: auto;
+}
+
+.image{
+    height: 200px;
+    width: 200px;
+}
+
+.productDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    
+}
+
+.parentClass{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttonBox{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.inputBox{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
