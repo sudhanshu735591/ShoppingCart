@@ -18,6 +18,8 @@ function Login(){
         }
         else{
             alert("wrong email or password");
+            setName("");
+            setPassword("");
         }
     }
 

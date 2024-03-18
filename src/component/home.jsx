@@ -67,10 +67,12 @@ function Home(){
 
 
     function handleLogout(){
-        localStorage.removeItem("Name");
-        localStorage.removeItem("Email");
-        localStorage.removeItem("Password");
-        setFlag(true);
+        // localStorage.removeItem("Name");
+        // localStorage.removeItem("Email");
+        // localStorage.removeItem("Password");
+        // setFlag(true);
+        navigate("/login");
+
     }
 
 
