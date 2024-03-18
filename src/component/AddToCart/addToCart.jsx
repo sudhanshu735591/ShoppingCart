@@ -16,14 +16,9 @@ function AddToCart(){
 
    function removeCartHandler(id){
     const filterData = data.filter((val)=>val.id!==id)
-    setData([...filterData]);
-    
-    
+    setData(filterData);
+    localStorage.setItem("FavData", JSON.stringify(filterData));
    }
-
-//    useEffect(()=>{
-//     localStorage.setItem("FavData", JSON.stringify(data));
-//    },[data]);
 
     return(
         <div className="cartparentBox">
