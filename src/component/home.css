@@ -35,3 +35,10 @@
     gap: 10px;
     justify-content: center;
 }
+
+.authBox{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}

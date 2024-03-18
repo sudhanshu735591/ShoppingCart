@@ -1,0 +1,13 @@
+.loginBox{
+    border: 2px solid;
+    width: 20%;
+    margin: auto;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.childBox{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

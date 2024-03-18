@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./home.css";
 import Button from "./Button/button";
+import { useNavigate } from "react-router-dom";
 
 function Home(){
 
@@ -9,6 +10,11 @@ function Home(){
     const [duplicateData, setDuplicateData] = useState();
 
     const [inputValue, setInputValue] = useState();
+
+    const [flag, setFlag] = useState(false);
+
+
+    const navigate = useNavigate();
 
     const fetchApi = async()=>{
         const apiData = await fetch("https://fakestoreapi.com/products");
@@ -50,11 +56,35 @@ function Home(){
     }
 
 
+    function loginClick(){
+        navigate("/login")
+    }
+
+
+    function signUp(){
+        navigate("/signup")
+    }
+
+
+    function handleLogout(){
+        // localStorage.removeItem("Name");
+        // localStorage.removeItem("Email");
+        // localStorage.removeItem("Password");
+        setFlag(true);
+    }
+
+
     return(
+   
         <div className="parentClass">
-            <div className="buttonBox">
+           
+           {
+            localStorage.getItem("Name") &&  localStorage.getItem("Password") && <>
+             <div className="buttonBox">
                 <Button onClick = {lowToHigh}  text = "Low to high"/>
                 <Button onClick={highToLow} text = "High to low"/>
+
+                <Button onClick={handleLogout} text = "Logout"/>
             </div>
 
             <div className="inputBox">
@@ -77,6 +107,18 @@ function Home(){
                 </div>
                 )
             })
+           }
+            </>
+           }
+
+           {
+            !localStorage.getItem("Name") &&  !localStorage.getItem("Password") &&  <>
+                 <div className="authBox">
+                    <Button onClick={loginClick} text = "Login"/>
+                    <Button onClick={signUp} text = "Sign Up"/>
+
+                </div>
+            </>
            }
         </div>
     )
