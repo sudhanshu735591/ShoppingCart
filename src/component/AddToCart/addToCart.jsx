@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./addToCart.css";
+import Button from "../Button/button";
 
 function AddToCart(){
 
@@ -8,14 +9,21 @@ function AddToCart(){
 
    useEffect(()=>{
     if(localStorage.getItem("FavData")){
-        JSON.parse(localStorage.getItem("FavData")).map((val)=>{
-            // console.log("eerff", val);
-            setData(val);
-            
-        })
+       setData(JSON.parse(localStorage.getItem("FavData")));
     }
+   },[]);
 
-   },[])
+
+   function removeCartHandler(id){
+    const filterData = data.filter((val)=>val.id!==id)
+    setData([...filterData]);
+    
+    
+   }
+
+//    useEffect(()=>{
+//     localStorage.setItem("FavData", JSON.stringify(data));
+//    },[data]);
 
     return(
         <div className="cartparentBox">
@@ -24,12 +32,12 @@ function AddToCart(){
                 return(
                     <div className="childBox">
                         <img className="addtocartimage" src={val.image} alt="image" />
+                        <p>Product Name: {val.title}</p>
+                        <p>Price : ₹ {val.price}</p>
+                        <p>{val.description}</p>
+                        <Button text = "Remove Item" onClick = {()=>removeCartHandler(val.id)}/>
                     </div>
                 )
-                
-                // val[index].map((value)=>{
-                //   
-                // })
             })
            }
         </div>

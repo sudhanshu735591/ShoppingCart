@@ -11,8 +11,7 @@ function Home(){
 
     const [inputValue, setInputValue] = useState();
 
-
-    const [favoriteData, setFavoriteData] = useState([])
+    const [favoriteData, setFavoriteData] = useState([]);
 
 
     const navigate = useNavigate();
@@ -79,24 +78,22 @@ function Home(){
     }
 
     function addToCartHandler(id){
-
         const filterData = data.filter((val)=>val.id===id);
-        setFavoriteData([...favoriteData, filterData]);
-        console.log("favoriteData", favoriteData);
+        setFavoriteData((prevFavoriteData) => [...prevFavoriteData, filterData[0]]);
 
-      
     }
 
-    useEffect(()=>{
-        const storedItem = JSON.parse(localStorage.getItem("FavData"));
-        if(storedItem){
-            setData(storedItem);
-        }
-    },[]);
+    useEffect(() => {
+        console.log(favoriteData);
+        localStorage.setItem("FavData", JSON.stringify(favoriteData));
+    }, [favoriteData]);
 
     function handleCart(){
         navigate("/cart");
     }
+
+
+   
 
 
     return(
@@ -128,17 +125,8 @@ function Home(){
                             <p>Product Name: {val.title}</p>
                             <p>Price : ₹ {val.price}</p>
                             <p>{val.description}</p>
-                            <Button onClick={()=>addToCartHandler(val.id, val.image)} text = "Add To Cart"/>
+                            <Button onClick={()=>addToCartHandler(val.id)} text = "Add To Cart"/>
 
-                            {/* {
-                                localStorage.getItem("FavData") && localStorage.getItem("FavData").map((value)=>{
-                                    if(value.id===val.id){
-                                        return(
-                                            <Button onClick={()=>addToCartHandler(val.id, val.image)} text = "Go To Cart"/>
-                                        )
-                                    }
-                                })
-                            } */}
                         </div>
                 </div>
                 )
