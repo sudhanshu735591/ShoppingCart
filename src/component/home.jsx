@@ -11,7 +11,8 @@ function Home(){
 
     const [inputValue, setInputValue] = useState();
 
-    const [flag, setFlag] = useState(false);
+
+    const [favoriteData, setFavoriteData] = useState([])
 
 
     const navigate = useNavigate();
@@ -33,7 +34,6 @@ function Home(){
 
     function lowToHigh(){
         const sortData = [...data].sort((a,b)=>a.price-b.price);
-        console.log("sortData", sortData);
         setData(sortData);
     }
 
@@ -47,9 +47,13 @@ function Home(){
 
     function searchData(){
         const filterData = data.filter((val)=>{
-            console.log(val.title+"---"+inputValue);
-            return val.title===inputValue
+            // console.log(val.title+"---"+inputValue);
+            if(val.title.includes(inputValue)){
+                console.log("val is", val);
+                return val;
+            }
         });
+
 
         console.log(filterData);
         setData(filterData);
@@ -72,7 +76,26 @@ function Home(){
         // localStorage.removeItem("Password");
         // setFlag(true);
         navigate("/login");
+    }
 
+    function addToCartHandler(id){
+
+        const filterData = data.filter((val)=>val.id===id);
+        setFavoriteData([...favoriteData, filterData]);
+        console.log("favoriteData", favoriteData);
+
+      
+    }
+
+    useEffect(()=>{
+        const storedItem = JSON.parse(localStorage.getItem("FavData"));
+        if(storedItem){
+            setData(storedItem);
+        }
+    },[]);
+
+    function handleCart(){
+        navigate("/cart");
     }
 
 
@@ -85,12 +108,11 @@ function Home(){
              <div className="buttonBox">
                 <Button onClick = {lowToHigh}  text = "Low to high"/>
                 <Button onClick={highToLow} text = "High to low"/>
-
                 <Button onClick={handleLogout} text = "Logout"/>
+                <Button onClick={handleCart} text = "Go To Cart"/>
             </div>
 
             <div className="inputBox">
-
                 <input value={inputValue} onChange={(e)=>setInputValue(e.target.value)} type="text" placeholder="Search by product name"/>
                 <button onClick={searchData} type="submit">Submit</button>
             </div>
@@ -106,6 +128,17 @@ function Home(){
                             <p>Product Name: {val.title}</p>
                             <p>Price : ₹ {val.price}</p>
                             <p>{val.description}</p>
+                            <Button onClick={()=>addToCartHandler(val.id, val.image)} text = "Add To Cart"/>
+
+                            {/* {
+                                localStorage.getItem("FavData") && localStorage.getItem("FavData").map((value)=>{
+                                    if(value.id===val.id){
+                                        return(
+                                            <Button onClick={()=>addToCartHandler(val.id, val.image)} text = "Go To Cart"/>
+                                        )
+                                    }
+                                })
+                            } */}
                         </div>
                 </div>
                 )
