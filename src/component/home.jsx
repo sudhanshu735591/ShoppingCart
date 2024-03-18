@@ -67,9 +67,9 @@ function Home(){
 
 
     function handleLogout(){
-        // localStorage.removeItem("Name");
-        // localStorage.removeItem("Email");
-        // localStorage.removeItem("Password");
+        localStorage.removeItem("Name");
+        localStorage.removeItem("Email");
+        localStorage.removeItem("Password");
         setFlag(true);
     }
 
