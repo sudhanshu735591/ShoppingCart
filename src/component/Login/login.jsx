@@ -14,7 +14,7 @@ function Login(){
     function handleSubmit(){
         console.log(localStorage.getItem("Name")+"----->>>", JSON.stringify(name));
         if(localStorage.getItem("Name")===JSON.stringify(name) && localStorage.getItem("Password")===JSON.stringify(password)){
-            navigate("/");
+            navigate("/home");
         }
         else{
             alert("wrong email or password");
@@ -32,6 +32,7 @@ function Login(){
             <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" placeholder="Enter Your password"/>
             <Button onClick = {handleSubmit} text = "Submit"/>
 
+            <p>I don't have account!! <span onClick={()=>navigate("/")} className="spanSignUp">Sign up</span></p>
         </div>
     </div>
    )

@@ -16,7 +16,6 @@ function Home(){
         return localData ? JSON.parse(localData) : [];
     });
 
-    const localData = localStorage.getItem("FavData");
 
     const navigate = useNavigate();
 
@@ -86,7 +85,7 @@ function Home(){
 
 
     function handleLogout(){
-        navigate("/login");
+        navigate("/");
     }
 
     function addToCartHandler(id, title){

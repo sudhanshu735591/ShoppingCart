@@ -1,5 +1,4 @@
 .loginBox{
-    border: 2px solid;
     width: 20%;
     margin: auto;
     padding: 20px;
@@ -10,4 +9,11 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+
+.spanSignUp{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
 }
