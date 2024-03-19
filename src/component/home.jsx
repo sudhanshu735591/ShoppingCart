@@ -48,18 +48,31 @@ function Home(){
     }
 
 
+    function stringConversion(str){
+        return str.toLowerCase().replace(/[_\W]+/g, '');
+    }
+
+
+
     function searchData(){
         const filterData = data.filter((val)=>{
-            if(val.title.includes(inputValue)){
-                console.log("val is", val);
+            let dataStr = stringConversion(inputValue);
+            let titleStr = stringConversion(val.title);
+            if(titleStr.includes(dataStr)){
                 return val;
             }
         });
 
-
-        console.log(filterData);
         setData(filterData);
     }
+
+
+    useEffect(()=>{
+        setData(duplicateData);
+    },[inputValue])
+
+
+
 
 
     function loginClick(){
