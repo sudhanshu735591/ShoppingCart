@@ -11,8 +11,12 @@ function Home(){
 
     const [inputValue, setInputValue] = useState();
 
-    const [favoriteData, setFavoriteData] = useState([]);
+    const [favoriteData, setFavoriteData] = useState(() => {
+        const localData = localStorage.getItem("FavData");
+        return localData ? JSON.parse(localData) : [];
+    });
 
+    const localData = localStorage.getItem("FavData");
 
     const navigate = useNavigate();
 
@@ -46,7 +50,6 @@ function Home(){
 
     function searchData(){
         const filterData = data.filter((val)=>{
-            // console.log(val.title+"---"+inputValue);
             if(val.title.includes(inputValue)){
                 console.log("val is", val);
                 return val;
@@ -70,30 +73,23 @@ function Home(){
 
 
     function handleLogout(){
-        // localStorage.removeItem("Name");
-        // localStorage.removeItem("Email");
-        // localStorage.removeItem("Password");
-        // setFlag(true);
         navigate("/login");
     }
 
-    function addToCartHandler(id){
+    function addToCartHandler(id, title){
         const filterData = data.filter((val)=>val.id===id);
         setFavoriteData((prevFavoriteData) => [...prevFavoriteData, filterData[0]]);
-
     }
 
     useEffect(() => {
-        console.log(favoriteData);
-        localStorage.setItem("FavData", JSON.stringify(favoriteData));
+        if (favoriteData) {
+            localStorage.setItem("FavData", JSON.stringify(favoriteData));
+        }
     }, [favoriteData]);
 
     function handleCart(){
         navigate("/cart");
     }
-
-
-   
 
 
     return(
@@ -117,16 +113,20 @@ function Home(){
 
            {
             data && data.map((val)=>{
+                
                 return(
                     <div className="homepage">
-                        
                         <img className="image" src={val.image} alt="image" />
                         <div className="productDetails">
                             <p>Product Name: {val.title}</p>
                             <p>Price : ₹ {val.price}</p>
                             <p>{val.description}</p>
-                            <Button onClick={()=>addToCartHandler(val.id)} text = "Add To Cart"/>
 
+                            {
+                                favoriteData.some((value)=>value.id===val.id)?
+                                <Button text = "Go To Cart"/>:
+                                <Button onClick={()=>addToCartHandler(val.id, val.title)} text = "Add To Cart"/>
+                            }
                         </div>
                 </div>
                 )
@@ -150,3 +150,84 @@ function Home(){
 
 
 export default Home;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ['tshirt', 't_shirt']
+
+
+// inputData.toLowerCase();
+
+
+// tArray.include('inputData.toLowerCase());
+
+
+// t_Shirt
+
+
+// t_shirt
+
+
+// ['tshirt', 't_shirt']
+
+
+// inputData.toLowerCase();
+
+
+// inputData.toLowerCase().split('-').join('')
+
+
+// 'TshirT'
+
+
+// tshirt
+
+
+// T__SHirt
+
+
+// t__shirt
+
+
+// t, shirt
+
+
+// tshirt
+
+
+// inputData.toLowerCase().split('-').join('')
+
+
+// inputData.toLowerCase().split('-').join('')
+
+
+// G_o_L_D
+
+
+// g_o_l_d
+
+
+// g, o, l, d
+
+
+// gold
+
+
+// .trim();
